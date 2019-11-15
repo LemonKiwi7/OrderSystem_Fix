@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="midnightblue">#191970</color>
+    <color name="cornflowerblue">#6495ED</color>
+    <color name="lime">#32CD32</color>
+    <color name="sky">#00BFFF</color>
+    <color name="orange">#FF4500</color>
 </resources>

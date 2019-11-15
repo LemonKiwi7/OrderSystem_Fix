@@ -1,128 +1,184 @@
 package com.example.ordersystem;
 
-import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import com.squareup.picasso.Picasso;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditActivity extends AppCompatActivity {
-
-    EditText editID, editName, editPrice;
-    Button btnChoose, btnAdd, btnList;
-    ImageView imageFood;
-
-    final int REQUEST_CODE_GALLERY = 999;
-
-    public static SQLiteHelper sqLiteHelper;
+    ConnectionClass connectionClass;
+    String message = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        connectionClass = new ConnectionClass();
 
-        init();
+        final ImageView imgpic = (ImageView) findViewById(R.id.imgpic);
+        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        final RadioButton radiofoods = (RadioButton) findViewById(R.id.radio_foods);
+        final RadioButton radionoodles = (RadioButton) findViewById(R.id.radio_noodles);
+        final RadioButton radiodrinks = (RadioButton) findViewById(R.id.radio_drinks);
+        final EditText edtid = (android.widget.EditText) findViewById(R.id.edtid);
+        final EditText edtname = (EditText) findViewById(R.id.edtname);
+        final EditText edtprice = (EditText) findViewById(R.id.edtprice);
+        final Button btnchoose = (Button) findViewById(R.id.btnchoose);
+        final Button btncancel = (Button) findViewById(R.id.btncancel);
+        final Button btnsave = (Button) findViewById(R.id.btnsave);
+        final Button btndelete = (Button) findViewById(R.id.btndelete);
 
-        sqLiteHelper = new SQLiteHelper(this, "OrderSystem.sqlite", null, 1);
-        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS FOOD (Id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, image BLOG)");
-        btnChoose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityCompat.requestPermissions(
-                        EditActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_CODE_GALLERY
-                );
-            }
-        });
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        btnchoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    sqLiteHelper.insertData(
-                            editID.getText().toString().trim(),
-                            editName.getText().toString().trim(),
-                            editPrice.getText().toString().trim(),
-                            imageViewToByte(imageFood)
-                    );
-                    Toast.makeText(getApplicationContext(), "Added successfully :)", Toast.LENGTH_SHORT).show();
-                    editID.setText("");
-                    editName.setText("");
-                    editPrice.setText("");
-                    imageFood.setImageResource(R.mipmap.ic_launcher);
+            }
+        });
 
+        btncancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtid.setText("");
+                edtname.setText("");
+                edtprice.setText("");
+                openMenu();
+            }
+        });//btncancel
+
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Connection con = connectionClass.CONN();
+                    if(con == null) {
+                        message = "ไม่พบฐานข้อมูล";
+                        Toast.makeText(EditActivity.this, message, Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (radiofoods.isChecked() == true) {
+                            String id = edtid.getText().toString();
+                            String name = edtname.getText().toString();
+                            int price = Integer.parseInt(edtprice.getText().toString());
+                            Bitmap image = ((BitmapDrawable) imgpic.getDrawable()).getBitmap();
+                            String strUpdate = "Update Foods Set f_name = '" + name + "', " + "f_price = " + price +  "Where f_id = '" + id + "'";
+
+                            Statement stmt1 = con.createStatement();
+                            stmt1.executeUpdate(strUpdate);
+                            message = "แก้ไขข้อมูลเรียบร้อย";
+                            Toast.makeText(EditActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                        else if (radionoodles.isChecked() == true) {
+                            String id = edtid.getText().toString();
+                            String name = edtname.getText().toString();
+                            int price = Integer.parseInt(edtprice.getText().toString());
+                            Bitmap image = ((BitmapDrawable) imgpic.getDrawable()).getBitmap();
+                            String strUpdate = "Update Noodles Set n_name = '" + name + "', " + "n_price = " + price +  "Where n_id = '" + id + "'";
+
+                            Statement stmt1 = con.createStatement();
+                            stmt1.executeUpdate(strUpdate);
+                            message = "แก้ไขข้อมูลเรียบร้อย";
+                            Toast.makeText(EditActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                        else if (radiodrinks.isChecked() == true) {
+                            String id = edtid.getText().toString();
+                            String name = edtname.getText().toString();
+                            int price = Integer.parseInt(edtprice.getText().toString());
+                            Bitmap image = ((BitmapDrawable) imgpic.getDrawable()).getBitmap();
+                            String strUpdate = "Update Drinks Set d_name = '" + name + "', " + "d_price = " + price +  "Where d_id = '" + id + "'";
+
+                            Statement stmt1 = con.createStatement();
+                            stmt1.executeUpdate(strUpdate);
+                            message = "แก้ไขข้อมูลเรียบร้อย";
+                            Toast.makeText(EditActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } catch (Exception ex) {
+                    message = "Exceptions \n" + ex;
+                    Toast.makeText(EditActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
+               edtid.setText("");
+               edtname.setText("");
+               edtprice.setText("");
+            }
+        });
+
+        btndelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Connection con = connectionClass.CONN();
+                    if(con == null) {
+                        message = "ไม่พบฐานข้อมูล";
+                        Toast.makeText(EditActivity.this, message, Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (radiofoods.isChecked() == true) {
+                            String id = edtid.getText().toString();
+                            String strDelete = "Delete From Foods Where f_id = '" + id + "'";
+                            Statement stmt1 = con.createStatement();
+                            stmt1.executeUpdate(strDelete);
+                            message = "ลบข้อมูลเรียบร้อย";
+                            Toast.makeText(EditActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                        else if (radionoodles.isChecked() == true) {
+                            String id = edtid.getText().toString();
+                            String strDelete = "Delete From Noodles Where n_id = '" + id + "'";
+
+                            Statement stmt1 = con.createStatement();
+                            stmt1.executeUpdate(strDelete);
+                            message = "ลบข้อมูลเรียบร้อย";
+                            Toast.makeText(EditActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                        else if (radiodrinks.isChecked() == true) {
+                            String id = edtid.getText().toString();
+                            String strDelete = "Delete From Drinks Where d_id = '" + id + "'";
+
+                            Statement stmt1 = con.createStatement();
+                            stmt1.executeUpdate(strDelete);
+                            message = "ลบข้อมูลเรียบร้อย";
+                            Toast.makeText(EditActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } catch (Exception ex) {
+                    message = "Exceptions \n" + ex;
+                    Toast.makeText(EditActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
+                edtid.setText("");
+                edtname.setText("");
+                edtprice.setText("");
             }
         });
     }
 
-    private byte[] imageViewToByte(ImageView image) {
-        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-
-        if(requestCode == REQUEST_CODE_GALLERY){
-            if(grantResults.length > 0 &&  grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, REQUEST_CODE_GALLERY);
-            }
-            else {
-                Toast.makeText(getApplicationContext(), "You don't have permission to access",Toast.LENGTH_SHORT).show();
-            }
-            return;
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if(requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            try {
-                InputStream inputStream = getContentResolver().openInputStream(uri);
-
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                imageFood.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-    private void init(){
-        editID  = (EditText) findViewById(R.id.editID);
-        editName = (EditText) findViewById(R.id.editName);
-        editPrice = (EditText) findViewById(R.id.editPrice);
-        btnChoose = (Button) findViewById(R.id.btnChoose);
-        btnAdd = (Button) findViewById(R.id.btnAdd);
-        btnList = (Button) findViewById(R.id.btnList);
-        imageFood = (ImageView) findViewById(R.id.imageFood);
+    public void openMenu() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 }

@@ -61,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
         String password = edtpass.getText().toString();
 
 
-
-
         @Override
         protected  void onPreExecute(){
             pbbar.setVisibility(View.VISIBLE);
@@ -107,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } catch (Exception ex) {
                     isSuccess = false;
-                    message = "Exceptions";
+                    message = ex.toString() + "Exceptions";
                 }
             }
             return message;

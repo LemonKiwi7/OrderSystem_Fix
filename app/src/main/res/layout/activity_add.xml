@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditActivity">
+    tools:context=".AddActivity">
+
 
     <ImageView
         android:id="@+id/imgpic"
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginTop="28dp"
-        android:src="@drawable/diet"
-        app:layout_constraintHorizontal_bias="0.238"
+        android:src="@drawable/pic"
+        app:layout_constraintHorizontal_bias="0.22"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnchoose"
+        android:id="@+id/btnupload"
         android:layout_width="120dp"
         android:layout_height="80dp"
         android:layout_marginTop="88dp"
@@ -59,6 +61,7 @@
             android:layout_height="wrap_content"
             android:text="เครื่องดื่ม"/>
     </RadioGroup>
+
 
     <EditText
         android:id="@+id/edtid"
@@ -116,21 +119,8 @@
         android:layout_marginTop="460dp"
         android:background="#00FF00"
         android:textSize="24dp"
-        android:text="แก้ไข"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btndelete"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="560dp"
-        android:background="#FF0000"
-        android:text="ลบข้อมูล"
-        android:textSize="24dp"
-        app:layout_constraintHorizontal_bias="0.8"
+        android:text="บันทึก"
+        app:layout_constraintHorizontal_bias="0.807"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

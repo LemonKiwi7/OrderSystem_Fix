@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<!--<android.support.constraint.ConstraintLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,24 +8,417 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
-    <Button
-        android:id="@+id/btnfood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="69dp"
-        android:text="อาหาร"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnedit"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnedit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="146dp"
-        android:text="ตั้งค่า"
-        app:layout_constraintStart_toEndOf="@+id/btnfood"
+    <EditText
+        android:id="@+id/table"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:hint="หมายเลขโต๊ะ"
+        android:gravity="center"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnorder"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="480dp"
+        android:background="@color/lime"
+        android:gravity="center"
+        android:text="บันทึก"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="82dp"
+                android:layout_height="100dp"
+                android:layout_margin="0dp">
+
+
+                <LinearLayout
+                    android:id="@+id/Linear1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#191970"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgfood"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/food" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ข้าว"
+                        android:textColor="#FFFF"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="82dp"
+                android:layout_height="100dp"
+                android:layout_margin="0dp">
+
+                <LinearLayout
+                    android:id="@+id/Linear2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#191970"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgnoodles"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/noodles" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="เส้น"
+                        android:textColor="#FFFF"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="82dp"
+                android:layout_height="100dp"
+                android:layout_margin="0dp">
+
+                <LinearLayout
+                    android:id="@+id/Linear3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#191970"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgdrink"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/drink" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="เครื่องดื่ม"
+                        android:textColor="#FFFF"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="82dp"
+                android:layout_height="100dp"
+                android:layout_margin="0dp">
+
+                <LinearLayout
+                    android:id="@+id/Linear4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#191970"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgbill"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/bill" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="บิล"
+                        android:textColor="#FFFF"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="82dp"
+                android:layout_height="100dp"
+                android:layout_margin="0dp">
+
+                <LinearLayout
+                    android:id="@+id/Linear5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#191970"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imglist"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/list" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="รายการ"
+                        android:textColor="#FFFF"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout >-->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+<TableRow
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+<TextView
+    android:id="@+id/textView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="ListView and Checkbox : "
+    android:layout_span="1"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+    </TableRow>
+<View
+    android:layout_height="1dip"
+    android:background="#CCCCCC" />
+
+<RelativeLayout
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+<Button
+    android:id="@+id/btnorder"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="49dp"
+    android:text="บันทึก" />
+
+    </RelativeLayout>
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.1">
+
+<ListView
+    android:id="@+id/listview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    </ListView>
+    </LinearLayout>
+
+<RelativeLayout
+    android:layout_gravity="center_vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="82dp"
+            android:layout_height="100dp"
+            android:layout_margin="0dp">
+
+
+            <LinearLayout
+                android:id="@+id/Linear1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#191970"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgfood"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/food" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ข้าว"
+                    android:textColor="#FFFF"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="82dp"
+            android:layout_height="100dp"
+            android:layout_margin="0dp">
+
+            <LinearLayout
+                android:id="@+id/Linear2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#191970"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgnoodles"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/noodles" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="เส้น"
+                    android:textColor="#FFFF"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="82dp"
+            android:layout_height="100dp"
+            android:layout_margin="0dp">
+
+            <LinearLayout
+                android:id="@+id/Linear3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#191970"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgdrink"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/drink" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="เครื่องดื่ม"
+                    android:textColor="#FFFF"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="82dp"
+            android:layout_height="100dp"
+            android:layout_margin="0dp">
+
+            <LinearLayout
+                android:id="@+id/Linear4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#191970"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgbill"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/bill" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="บิล"
+                    android:textColor="#FFFF"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+
+            <LinearLayout
+                android:id="@+id/Linear5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#191970"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imglist"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/list" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="รายการ"
+                    android:textColor="#FFFF"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    </RelativeLayout>
+
+<View
+    android:layout_height="1dip"
+    android:background="#CCCCCC" />
+
+    </TableLayout>
