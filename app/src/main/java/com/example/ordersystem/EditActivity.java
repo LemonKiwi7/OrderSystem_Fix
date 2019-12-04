@@ -50,7 +50,7 @@ public class EditActivity extends AppCompatActivity {
         final RadioButton radiofoods = (RadioButton) findViewById(R.id.radio_foods);
         final RadioButton radionoodles = (RadioButton) findViewById(R.id.radio_noodles);
         final RadioButton radiodrinks = (RadioButton) findViewById(R.id.radio_drinks);
-        final EditText edtid = (android.widget.EditText) findViewById(R.id.edtid);
+        final EditText edtid = (EditText) findViewById(R.id.edtid);
         final EditText edtname = (EditText) findViewById(R.id.edtname);
         final EditText edtprice = (EditText) findViewById(R.id.edtprice);
         final Button btnchoose = (Button) findViewById(R.id.btnchoose);
@@ -180,5 +180,6 @@ public class EditActivity extends AppCompatActivity {
     public void openMenu() {
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
+        finish();
     }
 }

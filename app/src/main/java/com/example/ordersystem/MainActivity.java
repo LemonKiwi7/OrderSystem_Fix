@@ -33,13 +33,6 @@ public class MainActivity extends AppCompatActivity {
         pbbar = (ProgressBar) findViewById(R.id.progressBar);
         pbbar.setVisibility(View.GONE);
 
-        btnlogin.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                openActivity2();
-            }
-        });
-
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -49,8 +42,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }//onCreate
 
+    public void openActivity1() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        intent.putExtra("Uniqid","From_Activity_A");
+        startActivity(intent);
+    }
+
     public void openActivity2() {
         Intent intent = new Intent(this, MenuActivity.class);
+        intent.putExtra("Uniqid","From_Activity_B");
         startActivity(intent);
     }
 
@@ -96,7 +96,10 @@ public class MainActivity extends AppCompatActivity {
                             isSuccess = true;
                             edtuserid.setText("");
                             edtpass.setText("");
-                            openActivity2();
+                            if (userid.trim().equals("E001")){
+                                openActivity1();
+                            }else{
+                            openActivity2();}
                         } else {
                             edtpass.setText("");
                             message = "ไม่สามารถเข้าสู่ระบบได้";

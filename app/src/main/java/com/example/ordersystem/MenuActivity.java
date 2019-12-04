@@ -31,7 +31,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -173,6 +177,11 @@ public class MenuActivity extends AppCompatActivity {
         String msg = "Fail";
         ProgressDialog progress;
 
+        String pattern = "MM/dd/yyyy HH:mm:ss";
+        DateFormat df = new SimpleDateFormat(pattern);
+        Date today = Calendar.getInstance().getTime();
+        String todayAsString = df.format(today);
+
         @Override
         protected void onPreExecute()
         {
@@ -183,7 +192,7 @@ public class MenuActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
                 try {
-                    final Connection con = connectionClass.CONN();
+                    Connection con = connectionClass.CONN();
                     if (con == null) {
                         success = false;
                     // show foods
@@ -257,40 +266,45 @@ public class MenuActivity extends AppCompatActivity {
                     }
                     //get item checked
                     else if (i==4) {
-                                int count = listView.getAdapter().getCount();
-                                for (int i = 0; i < count; i++) {
-                                    LinearLayout itemLayout = (LinearLayout) listView.getChildAt(i);
-                                    //under ConstraintLayout
-                                    CheckBox checkBox1 = (CheckBox) itemLayout.findViewById(R.id.checkbox);
-                                    TextView textName = (TextView) itemLayout.findViewById(R.id.txtname);
-                                    TextView textPrice = (TextView) itemLayout.findViewById(R.id.txtprice);
-                                    EditText textCount = (EditText) itemLayout.findViewById(R.id.txtcount);
-                                    if(checkBox1.isChecked())
-                                    {
-                                        try {
-
-                                            String resultname = textName.getText().toString();
-                                            String resultprice = textPrice.getText().toString();
-                                            String resultcount = textCount.getText().toString();
-                                            String strInsert = "Insert Into Orders_Details (ord_name, ord_price, ord_count) Values('"
-                                                    + resultname + "','" + resultprice + "','" + resultcount +"')";
-                                            Statement stmt = null;
-                                            stmt = con.createStatement();
-                                            stmt.executeUpdate(strInsert);
-                                            Log.d("Item "+String.valueOf(i), checkBox1.getTag().toString());
-                                       } catch (SQLException e) {
-                                            e.printStackTrace();
-                                            msg = i + "";
-                                        }
-                                        msg = "ลงฐานข้อมูล";
-                                        success = true;
-                                    } else {
-                                        msg = "ไม่ลงฐานข้อมูล";
-                                        success = false;
-                                    }
-                                }
-                    }
-
+                        int count = listView.getAdapter().getCount();
+                        int cntForComma = 1;
+                        EditText texttable = (EditText) findViewById(R.id.txttable);
+                        EditText textcount = (EditText) findViewById(R.id.txtcount);
+                        TextView textname = (TextView) findViewById(R.id.txtname);
+                        TextView textprice = (TextView) findViewById(R.id.txtprice);
+                        String resultname = textname.toString();
+                        String resultprice = textprice.toString();
+                        String resultcount = textcount.toString();
+                        String strInsert = "Insert Into Orders_Details (ord_table, ord_name, ord_price, ord_count) Values('"
+                               + texttable + "','" + resultname + "','" + resultprice + "','" + resultcount + "')";
+                        for (int i = 0; i < count; i++) {
+                            LinearLayout itemLayout = (LinearLayout) listView.getChildAt(i);
+                            CheckBox checkBox = (CheckBox) itemLayout.findViewById(R.id.checkbox);
+                            if (checkBox.isChecked()) {
+                                if (cntForComma > 1) {
+                                    strInsert = strInsert.toString() + ",('";
+                                };
+                                Log.d("Item " + String.valueOf(i), checkBox.getTag().toString());
+                                strInsert = strInsert.toString() + checkBox.getTag().toString() + "')";
+                                cntForComma += 1;
+                            }
+                        }
+                        try {
+                            if (con == null) {
+                                msg = "ฐานข้อมูลไม่เชื่อมต่อ";
+                                Toast.makeText(MenuActivity.this, msg,Toast.LENGTH_LONG);
+                            } else {
+                                Statement stmt1 = con.createStatement();
+                                stmt1.executeUpdate(strInsert);
+                                TextView txtview = (TextView) findViewById(R.id.textView3);
+                                txtview.setText("");
+                                txtview.setText(strInsert.toString());
+                            }
+                        } catch (Exception ex) {
+                            msg = ex.getMessage();
+                            Toast.makeText(MenuActivity.this, msg,Toast.LENGTH_SHORT);
+                        }
+}
                 } catch (Exception e) {
                     e.printStackTrace();
                     Writer writer = new StringWriter();
@@ -299,7 +313,7 @@ public class MenuActivity extends AppCompatActivity {
                     success = false;
                 }
                 return msg;
-        }
+        } //doInBackground
 
         @Override
         protected void onPostExecute(String msg)
@@ -320,8 +334,8 @@ public class MenuActivity extends AppCompatActivity {
                 }
 
             }
-        }
-    }
+        } //onPostExecute
+    } // SyncData
 
          public List<ClassListItems> parkingList;
          public Context context;
@@ -345,7 +359,7 @@ public class MenuActivity extends AppCompatActivity {
             }
 
             @Override
-            public View getView(final int position, final View convertView, ViewGroup parent) {
+            public View getView(int position, View convertView, ViewGroup parent) {
 
                 View rowView = convertView;
                 ViewHolder viewHolder= null;
@@ -369,32 +383,17 @@ public class MenuActivity extends AppCompatActivity {
                 viewHolder.textPrice.setText(parkingList.get(position).getPrice()+"");
                 Picasso.with(context).load(parkingList.get(position).getImg()).into(viewHolder.imageView);
 
-                final String name = viewHolder.textName.getText().toString();
-                final String price = viewHolder.textPrice.getText().toString();
-                final String count = viewHolder.textCount.getText().toString();
-                final CheckBox btn = viewHolder.checkBox;
+                /*  viewHolder.checkBox.setChecked(false);
+                viewHolder.checkBox.setTag(position);
+                int selected = viewHolder.checkBox.isChecked(s);
 
-          /*      Btnorder.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                            if (btn.isChecked()) {
-                                Connection con = connectionClass.CONN();
-                                String strInsert = "Insert Into Orders_Details (ord_name, ord_price, ord_count) Values('"
-                                        + name + "','" + price + "','" + count + "')";
-                                try {
-                                    Statement stmt1 = con.createStatement();
-                                    stmt1.executeUpdate(strInsert);
-                                    Toast.makeText(MenuActivity.this, "บันทึกเรียบร้อย" + count, Toast.LENGTH_SHORT).show();
-                                } catch (SQLException e) {
-                                    e.printStackTrace();
-                                    Toast.makeText(MenuActivity.this, e + "ไม่สามารถบันทึกได้", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-                }); */
+                if(selected.indexOf(parkingList.get(position).toString()) >= 0)) // <-- ตัวโค้ดนี้ไม่เข้าใจ
+                {
+                    viewHolder.checkBox.setChecked(true);
+                } */ //แก้ Scroll Bar กด Checked ที่เลือกเมนู แล้วไม่เลื่อนไปกดโดนตัวอื่น (ยังไม่สามารถแก้ได้)
 
                 return rowView;
-            }
+            } // View getView
 
 
 
@@ -411,6 +410,7 @@ public class MenuActivity extends AppCompatActivity {
             public Context context;
             ArrayList<ClassListItems> arrayList;
 
+
             private  MyAppAdapter(List<ClassListItems> apps, Context context)
             {
                 this.parkingList = apps;
@@ -422,12 +422,18 @@ public class MenuActivity extends AppCompatActivity {
 
     public void openList() {
         Intent intent = new Intent(this, ListActivity.class);
+        Bundle bundle = getIntent().getExtras();
+        String text = bundle.getString("Uniqid");
+        if (text.equals("From_Activity_A")){
+            intent.putExtra("Uniqid","From_Activity_A");
+        }else{
+        intent.putExtra("Uniqid","From_Activity_B");}
         startActivity(intent);
-    }
+    } // เปลี่ยนหน้าไปรายการ
 
     public void openBill() {
         Intent intent = new Intent(this, BillActivity.class);
         startActivity(intent);
-    }
+    } // เปลี่ยนหน้าไปบิล
 
 } //main

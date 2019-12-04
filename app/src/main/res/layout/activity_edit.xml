@@ -45,18 +45,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:textSize="18dp"
             android:text="อาหารจานเดียว" />
 
         <RadioButton
             android:id="@+id/radio_noodles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="18dp"
             android:text="อาหารเส้น"/>
 
         <RadioButton
             android:id="@+id/radio_drinks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="18dp"
             android:text="เครื่องดื่ม"/>
     </RadioGroup>
 

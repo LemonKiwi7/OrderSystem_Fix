@@ -218,14 +218,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
-<TextView
-    android:id="@+id/textView1"
+<EditText
+    android:id="@+id/txttable"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:text="ListView and Checkbox : "
-    android:layout_span="1"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
+    android:layout_marginStart="150dp"
+    android:hint="เลขที่โต๊ะ" />
     </TableRow>
 <View
     android:layout_height="1dip"
@@ -241,7 +239,7 @@
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
-    android:layout_marginLeft="49dp"
+    android:layout_marginLeft="150dp"
     android:text="บันทึก" />
 
     </RelativeLayout>
@@ -252,12 +250,20 @@
     android:layout_height="wrap_content"
     android:layout_weight="0.1">
 
-<ListView
-    android:id="@+id/listview"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="381dp">
+
     </ListView>
-    </LinearLayout>
+</LinearLayout>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="100dp"
+        android:layout_height="54dp"
+        android:layout_gravity="bottom"
+        android:text="TEXT" />
 
 <RelativeLayout
     android:layout_gravity="center_vertical"

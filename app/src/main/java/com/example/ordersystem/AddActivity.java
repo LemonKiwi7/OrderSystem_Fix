@@ -68,7 +68,7 @@ public class AddActivity extends AppCompatActivity {
                             String id = edtid.getText().toString();
                             String name = edtname.getText().toString();
                             int price = Integer.parseInt(edtprice.getText().toString());
-                            String strInsert = "Insert Into Noodles (n_id, n_name, n_price, n_pic) Values('" + id + "','" +
+                            String strInsert = "Insert Into Noodles (n_id, n_name, n_price) Values('" + id + "','" +
                                     name + "','" + price +"')";
 
                             Statement stmt1 = con.createStatement();
@@ -104,6 +104,7 @@ public class AddActivity extends AppCompatActivity {
     public void openMenu() {
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }//main
