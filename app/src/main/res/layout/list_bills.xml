@@ -5,8 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="160dp"
         android:orientation="horizontal">
 
         <FrameLayout
@@ -16,48 +15,57 @@
             <Button
                 android:id="@+id/btnbill"
                 android:layout_width="wrap_content"
-                android:layout_height="130dp"
+                android:layout_height="160dp"
                 android:background="@color/lime"
                 android:textSize="28dp"
                 android:text="ดูรายการสั่ง"/>
         </FrameLayout>
 
         <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:layout_width="250dp"
+            android:layout_width="260dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txttable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="เลขที่โต๊ะ: "
                 android:textColor="#000000"
-                android:textSize="24dp"
-                android:text="เลขที่โต๊ะ: " />
+                android:textSize="24dp" />
 
             <TextView
                 android:id="@+id/txtdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="เวลา: "
                 android:textColor="#000000"
-                android:textSize="24dp"
-                android:text="เวลา: " />
+                android:textSize="24dp" />
 
             <TextView
                 android:id="@+id/txttotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="ยอดรวม: "
                 android:textColor="#000000"
-                android:textSize="24dp"
-                android:text="ยอดรวม: " />
+                android:textSize="24dp" />
+
             <TextView
                 android:id="@+id/txtstatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="สถานะอาหาร: ยังไม่เสร็จ"
                 android:textColor="#000000"
-                android:textSize="24dp"
-                android:text="สถานะ: ยังไม่เสร็จ" />
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/txtpayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="สถานะจ่ายเงิน: ยังไม่เสร็จ"
+                android:textColor="#000000"
+                android:textSize="24dp" />
 
         </LinearLayout>
     </LinearLayout>

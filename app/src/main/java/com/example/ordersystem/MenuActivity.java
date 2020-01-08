@@ -44,7 +44,7 @@ public class MenuActivity extends AppCompatActivity {
     private MyAppAdapter myAppAdapter;
     private ListView listView;
     private boolean success = false;
-    private ConnectionClass connectionClass;
+    ConnectionClass connectionClass;
     public LinearLayout Linear1, Linear2, Linear3, Linear4, Linear5;
     public Button Btnorder;
     public int i = 0;
@@ -177,11 +177,6 @@ public class MenuActivity extends AppCompatActivity {
         String msg = "Fail";
         ProgressDialog progress;
 
-        String pattern = "MM/dd/yyyy HH:mm:ss";
-        DateFormat df = new SimpleDateFormat(pattern);
-        Date today = Calendar.getInstance().getTime();
-        String todayAsString = df.format(today);
-
         @Override
         protected void onPreExecute()
         {
@@ -195,8 +190,8 @@ public class MenuActivity extends AppCompatActivity {
                     Connection con = connectionClass.CONN();
                     if (con == null) {
                         success = false;
-                    // show foods
-                    } else if (i==1) {
+                        // show foods
+                    } else if (i == 1) {
                         String query = "SELECT f_pic,f_name,f_price FROM Foods";
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
@@ -219,7 +214,7 @@ public class MenuActivity extends AppCompatActivity {
                         }
                     }
                     // show noodles
-                    else if (i==2){
+                    else if (i == 2) {
                         String query = "SELECT n_pic,n_name,n_price FROM Noodles";
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
@@ -242,7 +237,7 @@ public class MenuActivity extends AppCompatActivity {
                         }
                     }
                     // show drinks
-                    else if (i==3) {
+                    else if (i == 3) {
                         String query = "SELECT d_pic,d_name,d_price FROM Drinks";
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
@@ -265,47 +260,47 @@ public class MenuActivity extends AppCompatActivity {
                         }
                     }
                     //get item checked
-                    else if (i==4) {
+                    else if (i == 4) {
+                        TextView txtview = (TextView) findViewById(R.id.textView3);
                         int count = listView.getAdapter().getCount();
                         int cntForComma = 1;
-                        EditText texttable = (EditText) findViewById(R.id.txttable);
-                        EditText textcount = (EditText) findViewById(R.id.txtcount);
-                        TextView textname = (TextView) findViewById(R.id.txtname);
-                        TextView textprice = (TextView) findViewById(R.id.txtprice);
-                        String resultname = textname.toString();
-                        String resultprice = textprice.toString();
-                        String resultcount = textcount.toString();
-                        String strInsert = "Insert Into Orders_Details (ord_table, ord_name, ord_price, ord_count) Values('"
-                               + texttable + "','" + resultname + "','" + resultprice + "','" + resultcount + "')";
+
+                        // time
+                        String pattern = "MM/dd/yyyy HH:mm:ss";
+                        DateFormat df = new SimpleDateFormat(pattern);
+                        Date today = Calendar.getInstance().getTime();
+                        String day = df.format(today);
+
+
+                        String strInsert = "Insert Into Orders_Details (ord_date, ord_table, ord_name, ord_price, ord_count) Values('";
+                        txtview.setText(strInsert);
                         for (int i = 0; i < count; i++) {
                             LinearLayout itemLayout = (LinearLayout) listView.getChildAt(i);
+                            EditText textTable = (EditText) findViewById(R.id.txttable);
                             CheckBox checkBox = (CheckBox) itemLayout.findViewById(R.id.checkbox);
-                            if (checkBox.isChecked()) {
+                            TextView textName = (TextView) itemLayout.findViewById(R.id.txtname);
+                            TextView textPrice = (TextView) itemLayout.findViewById(R.id.txtprice);
+                            EditText textCount = (EditText) itemLayout.findViewById(R.id.txtcount);
+                            txtview.setText("b 4 if1");
+                            if (checkBox.isChecked())
+                            {
                                 if (cntForComma > 1) {
                                     strInsert = strInsert.toString() + ",('";
+                                    txtview.setText("ifcom1");
                                 };
-                                Log.d("Item " + String.valueOf(i), checkBox.getTag().toString());
-                                strInsert = strInsert.toString() + checkBox.getTag().toString() + "')";
+                                txtview.setText("af com if1 str1 = " + strInsert.toString());
+                            //    Log.d("Item "+String.valueOf(i), checkBox.getTag().toString());
+                                strInsert = strInsert.toString()+ day +"','" + textTable.getText()+"','" + textName.getText()+"',"+ textPrice.getText()+"," + textCount.getText()+")";
+                                txtview.setText("af com if1 str2 = " + strInsert.toString());
                                 cntForComma += 1;
-                            }
-                        }
-                        try {
-                            if (con == null) {
-                                msg = "ฐานข้อมูลไม่เชื่อมต่อ";
-                                Toast.makeText(MenuActivity.this, msg,Toast.LENGTH_LONG);
-                            } else {
                                 Statement stmt1 = con.createStatement();
                                 stmt1.executeUpdate(strInsert);
-                                TextView txtview = (TextView) findViewById(R.id.textView3);
-                                txtview.setText("");
-                                txtview.setText(strInsert.toString());
+
                             }
-                        } catch (Exception ex) {
-                            msg = ex.getMessage();
-                            Toast.makeText(MenuActivity.this, msg,Toast.LENGTH_SHORT);
-                        }
-}
-                } catch (Exception e) {
+                        } //for
+                        txtview.setText("af 4");
+                    }
+               } catch (Exception e) {
                     e.printStackTrace();
                     Writer writer = new StringWriter();
                     e.printStackTrace(new PrintWriter(writer));
@@ -380,17 +375,16 @@ public class MenuActivity extends AppCompatActivity {
                     viewHolder = (ViewHolder) convertView.getTag();
                 }
                 viewHolder.textName.setText(parkingList.get(position).getName()+"");
-                viewHolder.textPrice.setText(parkingList.get(position).getPrice()+"");
+                viewHolder.textPrice.setText(parkingList.get(position).getPrice() +"");
                 Picasso.with(context).load(parkingList.get(position).getImg()).into(viewHolder.imageView);
 
-                /*  viewHolder.checkBox.setChecked(false);
+             /*   viewHolder.checkBox.setChecked(false);
                 viewHolder.checkBox.setTag(position);
                 int selected = viewHolder.checkBox.isChecked(s);
-
                 if(selected.indexOf(parkingList.get(position).toString()) >= 0)) // <-- ตัวโค้ดนี้ไม่เข้าใจ
                 {
                     viewHolder.checkBox.setChecked(true);
-                } */ //แก้ Scroll Bar กด Checked ที่เลือกเมนู แล้วไม่เลื่อนไปกดโดนตัวอื่น (ยังไม่สามารถแก้ได้)
+                }  //แก้ Scroll Bar กด Checked ที่เลือกเมนู แล้วไม่เลื่อนไปกดโดนตัวอื่น (ยังไม่สามารถแก้ได้)*/
 
                 return rowView;
             } // View getView

@@ -2,6 +2,7 @@ package com.example.ordersystem;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,13 +59,6 @@ public class BillActivity extends AppCompatActivity {
         billsArrayList = new ArrayList<ClassListBills>();
         btnData = (Button) findViewById(R.id.btndata);
 
-      /*  TimeZone thaiTimeZone = TimeZone.getTimeZone("Asia/Bangkok");
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTimeZone(thaiTimeZone);
-        Format formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String date = formatter.format(thaiTimeZone);*/
-
-
 
         btnData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +93,7 @@ public class BillActivity extends AppCompatActivity {
                     success = false;
                     // show bills
                 } else if (i==1) {
-                    String query = "SELECT or_table,or_date, or_total, or_status FROM Orders";
+                    String query = "SELECT or_table,or_date, or_total, or_status, or_payment FROM Orders";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
@@ -108,7 +102,7 @@ public class BillActivity extends AppCompatActivity {
                             try {
                                 billsArrayList.add(new ClassListBills(rs.getString("or_table")
                                         , rs.getString("or_date"), rs.getString("or_total")
-                                        , rs.getBoolean("or_status")));
+                                        , rs.getBoolean("or_status"),rs.getBoolean("or_payment")));
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
@@ -189,25 +183,39 @@ public class BillActivity extends AppCompatActivity {
                 viewHolder.textDate = rowView.findViewById(R.id.txtdate);
                 viewHolder.textTotal = rowView.findViewById(R.id.txttotal);
                 viewHolder.textStatus = rowView.findViewById(R.id.txtstatus);
+                viewHolder.textPayment = rowView.findViewById(R.id.txtpayment);
                 rowView.setTag(viewHolder);
             }
             else
             {
                 viewHolder = (BillActivity.MyAppAdapter.ViewHolder) convertView.getTag();
             }
-            viewHolder.textTable.setText(parkingList.get(position).getTable()+"");
+            viewHolder.textTable.setText("โต๊ะที่ " + parkingList.get(position).getTable());
             viewHolder.textDate.setText(parkingList.get(position).getDate()+"");
-            viewHolder.textTotal.setText(parkingList.get(position).getTotal()+"");
+            viewHolder.textTotal.setText("ราคารวม " +parkingList.get(position).getTotal()+" บาท");
             viewHolder.textStatus.setText(parkingList.get(position).getStatus()+"");
+            if (viewHolder.textStatus.getText().toString().equals("false")){
+            viewHolder.textStatus.setText("ยังไม่เสร็จ");
+            }else {viewHolder.textStatus.setText("เสร็จสิ้น");}
+
+            viewHolder.textPayment.setText(parkingList.get(position).getPayment()+"");
+            if (viewHolder.textPayment.getText().toString().equals("false")){
+                viewHolder.textPayment.setText("ยังไม่เสร็จ");
+            }else {viewHolder.textPayment.setText("เสร็จสิ้น");}
+
+            viewHolder.btnBill.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openPayment();
+                }
+            });
 
             return rowView;
         }
 
-
-
         public class ViewHolder
         {
-            TextView textTable, textDate, textTotal, textStatus;
+            TextView textTable, textDate, textTotal, textStatus, textPayment;
             Button btnBill;
         }
 
@@ -223,5 +231,11 @@ public class BillActivity extends AppCompatActivity {
             arrayList = new ArrayList<ClassListBills>();
             arrayList.addAll(parkingList);
         }
+    }//MyappAdapter
+
+    public void openPayment() {
+        Intent intent = new Intent(this, PaymentActivity.class);
+        startActivity(intent);
     }
+
 }

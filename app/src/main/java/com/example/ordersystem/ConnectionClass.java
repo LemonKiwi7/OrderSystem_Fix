@@ -25,7 +25,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ConnectionClass {
-    String ip = "192.168.1.5";
+    String ip = "172.16.10.152";
     String db = "OrderSystem";
     String un = "admin";
     String password = "1234";

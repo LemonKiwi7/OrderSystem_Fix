@@ -57,24 +57,35 @@ public class ProfileActivity extends AppCompatActivity {
                         String lname = edtlname.getText().toString();
                         String add = edtadd.getText().toString();
                         String tel = edttel.getText().toString();
+                        if (id.equals("")){
+                            Toast.makeText(ProfileActivity.this, "กรุณากรอกไอดี", Toast.LENGTH_SHORT).show();
+                        } else if (fname.equals("")){
+                            Toast.makeText(ProfileActivity.this, "กรุณากรอกชื่อ", Toast.LENGTH_SHORT).show();
+                        } else if (lname.equals("")){
+                            Toast.makeText(ProfileActivity.this, "กรุณากรอกนามสกุล", Toast.LENGTH_SHORT).show();
+                        } else if (add.equals("")){
+                            Toast.makeText(ProfileActivity.this, "กรุณากรอกที่อยู่", Toast.LENGTH_SHORT).show();
+                        } else if (tel.equals("")){
+                            Toast.makeText(ProfileActivity.this, "กรุณากรอกเบอร์โทร", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String strUpdate = "Update Employees Set em_fname = '" + fname + "', em_lname = '" + lname + "',"
+                                    + "em_address = '" + add + "', em_tel = '" + tel + "' Where em_id = '" + id + "'";
 
-                        String strUpdate = "Update Employees Set em_fname = '" + fname + "', " + "em_lname = '" + lname + "',"
-                                + "em_address = '" + add + "'," + "em_tel = '" + tel +  "Where em_id = '" + id + "'";
-
-                        Statement stmt1 = con.createStatement();
-                        stmt1.executeUpdate(strUpdate);
-                        message = "แก้ไขข้อมูลเรียบร้อย";
-                        Toast.makeText(ProfileActivity.this, message, Toast.LENGTH_SHORT).show();
+                            Statement stmt1 = con.createStatement();
+                            stmt1.executeUpdate(strUpdate);
+                            message = "แก้ไขข้อมูลเรียบร้อย";
+                            Toast.makeText(ProfileActivity.this, message, Toast.LENGTH_SHORT).show();
+                            edtid.setText("");
+                            edtfname.setText("");
+                            edtlname.setText("");
+                            edtadd.setText("");
+                            edttel.setText("");
+                        }
                     }
                 } catch (Exception ex) {
                     message = "Exceptions \n" + ex;
                     Toast.makeText(ProfileActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
-                edtid.setText("");
-                edtfname.setText("");
-                edtlname.setText("");
-                edtadd.setText("");
-                edttel.setText("");
             }
         });
 

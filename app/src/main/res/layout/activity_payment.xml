@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="26dp"
+        android:text="โต๊ะที่ 1"
+        android:textColor="#000000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ListView
+        android:id="@+id/listviewpayment"
+        android:layout_width="wrap_content"
+        android:layout_height="390dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ListView>
+
+
+    <TextView
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
+        android:text="สถานะอาหาร"
+        android:textColor="#000000"
+        android:textSize="26dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:text="ราคารวม"
+        android:textColor="#000000"
+        android:textSize="26dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="440dp"
+        android:text="เปลี่ยนสถานะ"
+        android:textSize="26dp"
+        android:background="#5DADE2 "
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="510dp"
+        android:text="ชำระเงิน"
+        android:textSize="26dp"
+        android:background="#7DCEA0"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="580dp"
+        android:background="#F8C471"
+        android:text="บันทึก"
+        android:textSize="26dp"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
