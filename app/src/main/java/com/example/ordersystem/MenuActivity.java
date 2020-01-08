@@ -212,7 +212,8 @@ public class MenuActivity extends AppCompatActivity {
                             msg = "ไม่พบข้อมูลอาหาร";
                             success = false;
                         }
-                    }
+                    }// else if i1
+
                     // show noodles
                     else if (i == 2) {
                         String query = "SELECT n_pic,n_name,n_price FROM Noodles";
@@ -235,7 +236,8 @@ public class MenuActivity extends AppCompatActivity {
                             msg = "ไม่พบข้อมูลอาหาร";
                             success = false;
                         }
-                    }
+                    }// else if i2
+
                     // show drinks
                     else if (i == 3) {
                         String query = "SELECT d_pic,d_name,d_price FROM Drinks";
@@ -258,7 +260,8 @@ public class MenuActivity extends AppCompatActivity {
                             msg = "ไม่พบข้อมูลอาหาร";
                             success = false;
                         }
-                    }
+                    }// else if i3
+
                     //get item checked
                     else if (i == 4) {
                         TextView txtview = (TextView) findViewById(R.id.textView3);
@@ -272,7 +275,7 @@ public class MenuActivity extends AppCompatActivity {
                         String day = df.format(today);
 
 
-                        String strInsert = "Insert Into Orders_Details (ord_date, ord_table, ord_name, ord_price, ord_count) Values('";
+                        String strInsert = "Insert Into Orders_Details (ord_table, ord_date, ord_name, ord_price, ord_count) Values('";
                         txtview.setText(strInsert);
                         for (int i = 0; i < count; i++) {
                             LinearLayout itemLayout = (LinearLayout) listView.getChildAt(i);
@@ -290,16 +293,16 @@ public class MenuActivity extends AppCompatActivity {
                                 };
                                 txtview.setText("af com if1 str1 = " + strInsert.toString());
                             //    Log.d("Item "+String.valueOf(i), checkBox.getTag().toString());
-                                strInsert = strInsert.toString()+ day +"','" + textTable.getText()+"','" + textName.getText()+"',"+ textPrice.getText()+"," + textCount.getText()+")";
+                                strInsert = strInsert.toString()+ textTable.getText() +"','" + day +"','" + textName.getText()+"',"+ textPrice.getText()+"," + textCount.getText()+")";
                                 txtview.setText("af com if1 str2 = " + strInsert.toString());
                                 cntForComma += 1;
                                 Statement stmt1 = con.createStatement();
                                 stmt1.executeUpdate(strInsert);
-
-                            }
+                                textCount.setText("");
+                            }//if checkbox
                         } //for
-                        txtview.setText("af 4");
-                    }
+                    }// else if i4
+
                } catch (Exception e) {
                     e.printStackTrace();
                     Writer writer = new StringWriter();
