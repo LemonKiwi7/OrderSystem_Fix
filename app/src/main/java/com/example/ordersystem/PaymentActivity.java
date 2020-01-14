@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -159,8 +158,6 @@ public class PaymentActivity extends AppCompatActivity {
             {
                 viewHolder = (PaymentActivity.MyAppAdapter.ViewHolder) convertView.getTag();
             }
-            viewHolder.textTable.setText("โต๊ะที่ " + parkingList.get(position).getTable());
-            viewHolder.textDate.setText("เวลา " + parkingList.get(position).getDate());
             viewHolder.textName.setText(parkingList.get(position).getName()+"");
             viewHolder.textPrice.setText("ราคา " + parkingList.get(position).getPrice() +" บาท");
             viewHolder.textCount.setText(parkingList.get(position).getCount() +" จำนวน");

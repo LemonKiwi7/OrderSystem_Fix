@@ -44,18 +44,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivity1() {
         Intent intent = new Intent(this, MenuActivity.class);
-        intent.putExtra("Uniqid","From_Activity_A");
+        intent.putExtra("Rank","Boss");
         startActivity(intent);
     }
 
     public void openActivity2() {
         Intent intent = new Intent(this, MenuActivity.class);
-        intent.putExtra("Uniqid","From_Activity_B");
+        intent.putExtra("Rank","Employee");
         startActivity(intent);
     }
 
     public class DoLogin extends AsyncTask<String, String, String> {
         String message ="";
+        String rank ="";
         Boolean isSuccess = false;
         String userid = edtuserid.getText().toString();
         String password = edtpass.getText().toString();
@@ -92,11 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
                         if (rs.next()) {
                             String username = rs.getString("em_fname") + " " + rs.getString("em_lname");
+                            rank = rs.getString("em_rank");
                             message = "ล็อคอินสำเร็จ ยินดีต้อนรับคุณ" + username + "";
                             isSuccess = true;
                             edtuserid.setText("");
                             edtpass.setText("");
-                            if (userid.trim().equals("E001")){
+                            if (rank.trim().equals("1")){
                                 openActivity1();
                             }else{
                             openActivity2();}

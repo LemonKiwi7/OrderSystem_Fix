@@ -65,14 +65,14 @@ public class ListActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         if(intent !=null)
         {
-            String strdata = intent.getExtras().getString("Uniqid");
-            if(strdata.equals("From_Activity_A"))
+            String strdata = intent.getExtras().getString("Rank");
+            if(strdata.equals("Boss"))
             {
                 intent.setClass(this,ProfileActivity.class);
                 startActivity(intent);
                 finish();
             }
-            else if(strdata.equals("From_Activity_B")) {
+            else if(strdata.equals("Employee")) {
                 Toast.makeText(ListActivity.this, "หน้านี้สำหรับเจ้าของร้านเท่านั้น", Toast.LENGTH_SHORT).show();
             }
         }

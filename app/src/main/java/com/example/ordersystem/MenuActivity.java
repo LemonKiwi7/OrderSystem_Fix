@@ -5,14 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,20 +20,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.squareup.picasso.Picasso;
-import org.w3c.dom.Text;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
@@ -432,11 +426,11 @@ public class MenuActivity extends AppCompatActivity {
     public void openList() {
         Intent intent = new Intent(this, ListActivity.class);
         Bundle bundle = getIntent().getExtras();
-        String text = bundle.getString("Uniqid");
-        if (text.equals("From_Activity_A")){
-            intent.putExtra("Uniqid","From_Activity_A");
+        String text = bundle.getString("Rank");
+        if (text.equals("Boss")){
+            intent.putExtra("Rank","Boss");
         }else{
-        intent.putExtra("Uniqid","From_Activity_B");}
+        intent.putExtra("Rank","Employee");}
         startActivity(intent);
     } // เปลี่ยนหน้าไปรายการ
 
