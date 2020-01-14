@@ -267,6 +267,10 @@ public class MenuActivity extends AppCompatActivity {
                         TextView txtview = (TextView) findViewById(R.id.textView3);
                         int count = listView.getAdapter().getCount();
                         int cntForComma = 1;
+                        int total = 0;
+                        int resultall = 0;
+                        int status = 0;
+                        int payment = 0;
 
                         // time
                         String pattern = "MM/dd/yyyy HH:mm:ss";
@@ -276,6 +280,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
                         String strInsert = "Insert Into Orders_Details (ord_table, ord_date, ord_name, ord_price, ord_count) Values('";
+
                         txtview.setText(strInsert);
                         for (int i = 0; i < count; i++) {
                             LinearLayout itemLayout = (LinearLayout) listView.getChildAt(i);
@@ -284,21 +289,28 @@ public class MenuActivity extends AppCompatActivity {
                             TextView textName = (TextView) itemLayout.findViewById(R.id.txtname);
                             TextView textPrice = (TextView) itemLayout.findViewById(R.id.txtprice);
                             EditText textCount = (EditText) itemLayout.findViewById(R.id.txtcount);
-                            txtview.setText("b 4 if1");
+                            String price = textPrice.getText().toString();
+                            int result = Integer.valueOf(price);
+                            String count2 = textCount.getText().toString();
+                            int result2 = Integer.valueOf(count2);
+
                             if (checkBox.isChecked())
                             {
                                 if (cntForComma > 1) {
                                     strInsert = strInsert.toString() + ",('";
-                                    txtview.setText("ifcom1");
+                                    resultall = result * result2;
+                                    total += resultall;
                                 };
-                                txtview.setText("af com if1 str1 = " + strInsert.toString());
                             //    Log.d("Item "+String.valueOf(i), checkBox.getTag().toString());
                                 strInsert = strInsert.toString()+ textTable.getText() +"','" + day +"','" + textName.getText()+"',"+ textPrice.getText()+"," + textCount.getText()+")";
-                                txtview.setText("af com if1 str2 = " + strInsert.toString());
                                 cntForComma += 1;
+                                resultall = result * result2;
+                                total += resultall;
                                 Statement stmt1 = con.createStatement();
                                 stmt1.executeUpdate(strInsert);
-                                textCount.setText("");
+                                String strInsert2 = "Insert Into Orders (or_table, or_date, or_total, or_status, or_payment) Values('"+ textTable.getText() +"','"+ day +"',"+ total +","+ status +","+ payment +")";
+                                Statement stmt2 = con.createStatement();
+                                stmt2.executeUpdate(strInsert2);
                             }//if checkbox
                         } //for
                     }// else if i4

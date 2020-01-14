@@ -65,15 +65,16 @@ public class PaymentActivity extends AppCompatActivity {
                     success = false;
                     // show bills
                 } else if (i==1) {
-                    String query = "SELECT or_table,or_date, or_total, or_status, or_payment FROM Orders";
+                    String query = "SELECT ord_table, ord_date, ord_name, ord_price, ord_count FROM Orders_Details";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
                     if (rs != null) {
                         while (rs.next()) {
                             try {
-                                paymentArrayList.add(new ClassListPayment(rs.getString("or_table")
-                                        , rs.getString("or_date"), rs.getString("or_total")));
+                                paymentArrayList.add(new ClassListPayment(rs.getString("ord_table")
+                                        , rs.getString("ord_date"), rs.getString("ord_name"), rs.getString("ord_price")
+                                        , rs.getString("ord_count")));
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
@@ -158,16 +159,17 @@ public class PaymentActivity extends AppCompatActivity {
             {
                 viewHolder = (PaymentActivity.MyAppAdapter.ViewHolder) convertView.getTag();
             }
+            viewHolder.textTable.setText("โต๊ะที่ " + parkingList.get(position).getTable());
+            viewHolder.textDate.setText("เวลา " + parkingList.get(position).getDate());
             viewHolder.textName.setText(parkingList.get(position).getName()+"");
             viewHolder.textPrice.setText("ราคา " + parkingList.get(position).getPrice() +" บาท");
             viewHolder.textCount.setText(parkingList.get(position).getCount() +" จำนวน");
-
             return rowView;
         }
 
         public class ViewHolder
         {
-            TextView textName, textPrice, textCount;
+            TextView textTable, textDate, textName, textPrice, textCount;
 
         }
 
