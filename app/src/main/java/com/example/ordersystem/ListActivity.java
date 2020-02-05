@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 public class ListActivity extends AppCompatActivity {
 
-    LinearLayout LinearAdd, LinearEdit, LinearPro;
+    LinearLayout LinearAdd, LinearEdit, LinearPro, LinearRe;
     ConnectionClass connectionClass;
     String message ="";
 
@@ -23,9 +23,10 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
         connectionClass = new ConnectionClass();
 
-        LinearAdd = (LinearLayout) findViewById(R.id.linearAdd);
-        LinearEdit = (LinearLayout) findViewById(R.id.linearEdit);
-        LinearPro = (LinearLayout) findViewById(R.id.linearProfile);
+        LinearAdd = findViewById(R.id.linearAdd);
+        LinearEdit = findViewById(R.id.linearEdit);
+        LinearPro = findViewById(R.id.linearProfile);
+        LinearRe = findViewById(R.id.linearReport);
 
         LinearAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,18 +49,24 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
+        LinearRe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRe();
+            }
+        });
+
 
     }
     public void openAdd() {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
-        finish();
     }
     public void openEdit() {
         Intent intent = new Intent(this, EditActivity.class);
         startActivity(intent);
-        finish();
     }
+
     public void openPro() {
         Connection con = connectionClass.CONN();
         Intent intent = this.getIntent();
@@ -70,12 +77,28 @@ public class ListActivity extends AppCompatActivity {
             {
                 intent.setClass(this,ProfileActivity.class);
                 startActivity(intent);
-                finish();
             }
             else if(strdata.equals("Employee")) {
                 Toast.makeText(ListActivity.this, "หน้านี้สำหรับเจ้าของร้านเท่านั้น", Toast.LENGTH_SHORT).show();
             }
         }
+    }//openPro
 
-    }
-}
+    public void openRe() {
+        Connection con = connectionClass.CONN();
+        Intent intent = this.getIntent();
+        if(intent !=null)
+        {
+            String strdata = intent.getExtras().getString("Rank");
+            if(strdata.equals("Boss"))
+            {
+                intent.setClass(this,ReportActivity.class);
+                startActivity(intent);
+            }
+            else if(strdata.equals("Employee")) {
+                Toast.makeText(ListActivity.this, "หน้านี้สำหรับเจ้าของร้านเท่านั้น", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }//openRe
+
+}//main

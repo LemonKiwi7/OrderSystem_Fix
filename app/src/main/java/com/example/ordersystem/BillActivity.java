@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,10 +30,10 @@ public class BillActivity extends AppCompatActivity {
     private ArrayList<ClassListBills> billsArrayList;
     private BillActivity.MyAppAdapter myAppAdapter;
     private ListView listView;
-    private Button btnData;
     public  int i;
     private boolean success = false;
     private ConnectionClass connectionClass;
+    String table,date;
 
 
     @Override
@@ -39,22 +41,15 @@ public class BillActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill);
 
-        listView = (ListView) findViewById(R.id.listviewbill);
+        listView = findViewById(R.id.listviewbill);
         connectionClass = new ConnectionClass();
         billsArrayList = new ArrayList<ClassListBills>();
-        btnData = (Button) findViewById(R.id.btndata);
 
-
-        btnData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                i = 1;
-                SyncData billData = new SyncData();
-                billData.execute("");
-                billsArrayList.clear();
-            }
-        });
-
+        // show listview
+        i = 1;
+        SyncData billData = new SyncData();
+        billData.execute("");
+        billsArrayList.clear();
 
 
     } //onCreate
@@ -78,7 +73,7 @@ public class BillActivity extends AppCompatActivity {
                     success = false;
                     // show bills
                 } else if (i==1) {
-                    String query = "SELECT or_table,or_date, or_total, or_status, or_payment FROM Orders";
+                    String query = "SELECT or_table,or_date, or_total, or_status, or_payment FROM Orders Where or_status= 'False' and or_payment= 'False'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
@@ -169,32 +164,43 @@ public class BillActivity extends AppCompatActivity {
                 viewHolder.textTotal = rowView.findViewById(R.id.txttotal);
                 viewHolder.textStatus = rowView.findViewById(R.id.txtstatus);
                 viewHolder.textPayment = rowView.findViewById(R.id.txtpayment);
+                viewHolder.checkBox = rowView.findViewById(R.id.checkbox);
                 rowView.setTag(viewHolder);
             }
             else
             {
                 viewHolder = (BillActivity.MyAppAdapter.ViewHolder) convertView.getTag();
             }
-            viewHolder.textTable.setText("โต๊ะที่ " + parkingList.get(position).getTable());
+            viewHolder.textTable.setText(parkingList.get(position).getTable());
             viewHolder.textDate.setText(parkingList.get(position).getDate()+"");
             viewHolder.textTotal.setText("ราคารวม " +parkingList.get(position).getTotal()+" บาท");
             viewHolder.textStatus.setText(parkingList.get(position).getStatus()+"");
-            if (viewHolder.textStatus.getText().toString().equals("false")){
-            viewHolder.textStatus.setText("ยังไม่เสร็จ");
-            }else {viewHolder.textStatus.setText("เสร็จสิ้น");}
-
             viewHolder.textPayment.setText(parkingList.get(position).getPayment()+"");
+
+
+            if (viewHolder.textStatus.getText().toString().equals("false")){
+            viewHolder.textStatus.setText("สถานะ: ยังไม่เสร็จ");
+            }else {viewHolder.textStatus.setText("สถานะ: เสร็จสิ้น");}
+
             if (viewHolder.textPayment.getText().toString().equals("false")){
-                viewHolder.textPayment.setText("ยังไม่เสร็จ");
-            }else {viewHolder.textPayment.setText("เสร็จสิ้น");}
+                viewHolder.textPayment.setText("สถานะ: ยังไม่ชำระเงิน");
+            }else {viewHolder.textPayment.setText("สถานะ: ชำระเงินแล้ว");}
+
+            final ViewHolder finalViewHolder = viewHolder;
 
             viewHolder.btnBill.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openPayment();
+                    Intent intent = new Intent(context,PaymentActivity.class);
+                    intent.putExtra("Table", finalViewHolder.textTable.getText().toString());
+                    intent.putExtra("Date",finalViewHolder.textDate.getText().toString());
+                    intent.putExtra("Total",finalViewHolder.textTotal.getText().toString());
+                    intent.putExtra("Status",finalViewHolder.textStatus.getText().toString());
+                    intent.putExtra("Payment",finalViewHolder.textPayment.getText().toString());
+                    startActivity(intent);
+                    finish();
                 }
             });
-
             return rowView;
         }
 
@@ -202,6 +208,7 @@ public class BillActivity extends AppCompatActivity {
         {
             TextView textTable, textDate, textTotal, textStatus, textPayment;
             Button btnBill;
+            CheckBox checkBox;
         }
 
 
@@ -217,10 +224,4 @@ public class BillActivity extends AppCompatActivity {
             arrayList.addAll(parkingList);
         }
     }//MyappAdapter
-
-    public void openPayment() {
-        Intent intent = new Intent(this, PaymentActivity.class);
-        startActivity(intent);
-    }
-
 }

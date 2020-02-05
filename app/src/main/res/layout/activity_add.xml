@@ -7,27 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".AddActivity">
 
+    <LinearLayout
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_140sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     <ImageView
         android:id="@+id/imgpic"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/pic"
-        app:layout_constraintHorizontal_bias="0.22"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/pic" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnupload"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="88dp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_60sdp"
         android:background="#3498DB"
-        android:textSize="24dp"
-        android:text="เลือกรูปภาพ"
-        app:layout_constraintHorizontal_bias="0.855"
+        android:text="ทดสอบรูปภาพ"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +42,7 @@
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="@dimen/_170sdp"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -47,83 +53,94 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:textSize="18dp"
-            android:text="อาหารจานเดียว" />
+            android:text="อาหารจานเดียว"
+            android:textSize="@dimen/_14sdp" />
 
         <RadioButton
             android:id="@+id/radio_noodles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:text="อาหารเส้น"/>
+            android:text="อาหารเส้น"
+            android:textSize="@dimen/_14sdp" />
 
         <RadioButton
             android:id="@+id/radio_drinks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:text="เครื่องดื่ม"/>
+            android:text="เครื่องดื่ม"
+            android:textSize="@dimen/_14sdp" />
     </RadioGroup>
 
+    <EditText
+        android:id="@+id/edturl"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_200sdp"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/_14sdp"
+        android:hint="URL รูปภาพ"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edtid"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="300dp"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_250sdp"
         android:gravity="center_vertical"
         android:hint="รหัส"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:textSize="@dimen/_14sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edtname"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="350dp"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_300sdp"
         android:gravity="center_vertical"
         android:hint="ชื่อ"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:textSize="@dimen/_14sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edtprice"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="400dp"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_350sdp"
         android:gravity="center_vertical"
         android:hint="ราคา"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:textSize="@dimen/_14sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btncancel"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="460dp"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_420sdp"
         android:background="#F4D03F"
-        android:textSize="24dp"
         android:text="ยกเลิก"
-        app:layout_constraintHorizontal_bias="0.189"
+        android:textSize="@dimen/_20sdp"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnsave"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="460dp"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_420sdp"
         android:background="#00FF00"
-        android:textSize="24dp"
         android:text="บันทึก"
-        app:layout_constraintHorizontal_bias="0.807"
+        android:textSize="@dimen/_20sdp"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

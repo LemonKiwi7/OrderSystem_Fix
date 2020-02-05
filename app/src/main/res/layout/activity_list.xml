@@ -8,9 +8,9 @@
 
         <LinearLayout
             android:id="@+id/linearAdd"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_width="@dimen/_280sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             android:background="@color/lime"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,8 +21,8 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
                     android:src="@drawable/ramen" />
             </FrameLayout>
 
@@ -38,16 +38,16 @@
                     android:gravity="center"
                     android:textColor="#FFFF"
                     android:text="เพิ่มข้อมูลรายการอาหาร"
-                    android:textSize="36dp" />
+                    android:textSize="@dimen/_30sdp" />
 
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearEdit"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="250dp"
+            android:layout_width="@dimen/_280sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_150sdp"
             android:background="@color/sky"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,8 +59,8 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
                     android:src="@drawable/rice" />
             </FrameLayout>
 
@@ -76,7 +76,7 @@
                     android:gravity="center"
                     android:textColor="#FFFF"
                     android:text="แก้ไขข้อมูลรายการอาหาร"
-                    android:textSize="36dp" />
+                    android:textSize="@dimen/_30sdp" />
 
 
             </LinearLayout>
@@ -84,9 +84,9 @@
 
     <LinearLayout
         android:id="@+id/linearProfile"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginTop="@dimen/_250sdp"
         android:background="@color/orange"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,8 +98,8 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
                 android:src="@drawable/dessert" />
         </FrameLayout>
 
@@ -115,8 +115,46 @@
                 android:gravity="center"
                 android:textColor="#FFFF"
                 android:text="ปรับปรุงข้อมูลพนักงาน"
-                android:textSize="36dp" />
+                android:textSize="@dimen/_30sdp" />
 
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearReport"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginTop="@dimen/_350sdp"
+        android:background="@color/yellow"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:src="@drawable/hotpot" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#FFFF"
+                android:text="แสดงยอดขายทั้งหมด"
+                android:textSize="@dimen/_30sdp" />
 
         </LinearLayout>
     </LinearLayout>

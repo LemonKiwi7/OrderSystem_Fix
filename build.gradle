@@ -1,4 +1,8 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext {
+    var = 'D:\\Android\\keystore.jks'
+    var1 = 'D:\\Android\\OrderSystem\\keystore.jks'
+    var2 = var1
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
     repositories {

@@ -2,17 +2,22 @@ package com.example.ordersystem;
 
 public class ClassListItems {
 
-    public String img, name, price;
+    public String name, price, img;
+    public boolean isChecked;
 
 
-    public ClassListItems(String img, String name, String price)
+
+    public ClassListItems(String name, String price, String img)
     {
-        this.img = img;
         this.name = name;
         this.price = price;
+        this.img = img;
     }
-    public String getImg() {return img;}
+
     public String getName() { return name; }
     public String getPrice() {return price;}
+    public String getImage() {return img;}
+
+
 
 }

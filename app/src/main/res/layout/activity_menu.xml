@@ -1,70 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.constraint.ConstraintLayout
-
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MenuActivity">
+    android:id="@+id/layout_menu"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <EditText
-        android:id="@+id/table"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="28dp"
-        android:hint="หมายเลขโต๊ะ"
-        android:gravity="center"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/txttable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="เลขที่โต๊ะ"
+        android:textSize="20dp"
+        app:layout_constraintHorizontal_bias="0.030"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnorder"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="480dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@color/lime"
-        android:gravity="center"
         android:text="บันทึก"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintHorizontal_bias="0.400"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btnexit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="#FF0000"
+        android:text="ออกจากระบบ"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintHorizontal_bias="0.900"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginTop="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:background="@drawable/border_listview"
+        android:divider="#FFCC00"
+        android:dividerHeight="2dp"
+        android:scrollbars="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ListView
-            android:id="@+id/listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>
-    </LinearLayout>
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/_100sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom">
-
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
 
             <android.support.v7.widget.CardView
-                android:layout_width="82dp"
-                android:layout_height="100dp"
-                android:layout_margin="0dp">
+                android:layout_width="@dimen/_63sdp"
+                android:layout_height="match_parent">
 
 
                 <LinearLayout
@@ -77,8 +88,8 @@
 
                     <ImageView
                         android:id="@+id/imgfood"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
                         android:src="@drawable/food" />
 
                     <TextView
@@ -91,9 +102,8 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:layout_width="82dp"
-                android:layout_height="100dp"
-                android:layout_margin="0dp">
+                android:layout_width="@dimen/_63sdp"
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/Linear2"
@@ -105,8 +115,8 @@
 
                     <ImageView
                         android:id="@+id/imgnoodles"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
                         android:src="@drawable/noodles" />
 
                     <TextView
@@ -119,9 +129,8 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:layout_width="82dp"
-                android:layout_height="100dp"
-                android:layout_margin="0dp">
+                android:layout_width="@dimen/_63sdp"
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/Linear3"
@@ -133,8 +142,8 @@
 
                     <ImageView
                         android:id="@+id/imgdrink"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
                         android:src="@drawable/drink" />
 
                     <TextView
@@ -147,9 +156,8 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:layout_width="82dp"
-                android:layout_height="100dp"
-                android:layout_margin="0dp">
+                android:layout_width="@dimen/_63sdp"
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/Linear4"
@@ -161,8 +169,8 @@
 
                     <ImageView
                         android:id="@+id/imgbill"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
                         android:src="@drawable/bill" />
 
                     <TextView
@@ -175,9 +183,8 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:layout_width="82dp"
-                android:layout_height="100dp"
-                android:layout_margin="0dp">
+                android:layout_width="@dimen/_64sdp"
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/Linear5"
@@ -189,8 +196,8 @@
 
                     <ImageView
                         android:id="@+id/imglist"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
                         android:src="@drawable/list" />
 
                     <TextView
@@ -201,230 +208,8 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-
-</android.support.constraint.ConstraintLayout >-->
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tableLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-
-
-<TableRow
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
-
-<EditText
-    android:id="@+id/txttable"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="150dp"
-    android:hint="เลขที่โต๊ะ" />
-    </TableRow>
-<View
-    android:layout_height="1dip"
-    android:background="#CCCCCC" />
-
-<RelativeLayout
-    android:layout_gravity="center_vertical|center_horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-<Button
-    android:id="@+id/btnorder"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginLeft="150dp"
-    android:text="บันทึก" />
-
-    </RelativeLayout>
-
-<LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="0.1">
-
-
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_height="381dp">
-
-    </ListView>
-</LinearLayout>
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="100dp"
-        android:layout_height="54dp"
-        android:layout_gravity="bottom"
-        android:text="TEXT" />
-
-<RelativeLayout
-    android:layout_gravity="center_vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="100dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-
-
-
-        <android.support.v7.widget.CardView
-            android:layout_width="82dp"
-            android:layout_height="100dp"
-            android:layout_margin="0dp">
-
-
-            <LinearLayout
-                android:id="@+id/Linear1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#191970"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imgfood"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/food" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ข้าว"
-                    android:textColor="#FFFF"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="82dp"
-            android:layout_height="100dp"
-            android:layout_margin="0dp">
-
-            <LinearLayout
-                android:id="@+id/Linear2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#191970"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imgnoodles"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/noodles" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="เส้น"
-                    android:textColor="#FFFF"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="82dp"
-            android:layout_height="100dp"
-            android:layout_margin="0dp">
-
-            <LinearLayout
-                android:id="@+id/Linear3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#191970"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imgdrink"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/drink" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="เครื่องดื่ม"
-                    android:textColor="#FFFF"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="82dp"
-            android:layout_height="100dp"
-            android:layout_margin="0dp">
-
-            <LinearLayout
-                android:id="@+id/Linear4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#191970"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imgbill"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/bill" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="บิล"
-                    android:textColor="#FFFF"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-
-
-            <LinearLayout
-                android:id="@+id/Linear5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#191970"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imglist"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/list" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="รายการ"
-                    android:textColor="#FFFF"
-                    android:textStyle="bold" />
-            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
-    </RelativeLayout>
 
-<View
-    android:layout_height="1dip"
-    android:background="#CCCCCC" />
-
-    </TableLayout>
+</android.support.constraint.ConstraintLayout>

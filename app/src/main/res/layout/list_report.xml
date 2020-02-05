@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:background="#ABEBC6"
+                android:textSize="@dimen/_15sdp"
+                android:text="ชื่อ" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:background="#F9E79F"
+                android:textSize="@dimen/_15sdp"
+                android:text="ราคา" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtcount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:background="#F0B27A"
+                android:textSize="@dimen/_15sdp"
+                android:text="จำนวน" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -8,11 +8,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionClass {
-    String ip = "192.168.1.5";
+    String ip = "172.16.20.112";
     String db = "OrderSystem";
     String un = "admin";
     String password = "1234";
-    //172.16.11.65 172.16.10.69 192.168.1.5
+    //172.16.11.65 172.16.10.69 192.168.1.5 172.16.10.152
 
     @SuppressLint("NewApi")
     public Connection CONN() {

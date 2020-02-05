@@ -8,72 +8,92 @@
 
 
     <TextView
-        android:id="@+id/txttable2"
+        android:id="@+id/txttable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="โต๊ะที่ 1"
         android:textColor="#000000"
-        android:textSize="26dp"
-        app:layout_constraintHorizontal_bias="0.238"
+        android:textSize="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtdate2"
+        android:id="@+id/txtdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="เวลา"
         android:textColor="#000000"
-        android:textSize="26dp"
-        app:layout_constraintHorizontal_bias="0.67"
+        android:textSize="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/listviewpayment"
-        android:layout_width="wrap_content"
-        android:layout_height="390dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_250sdp"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:background="@drawable/border_listview"
+        android:divider="#FFCC00"
+        android:dividerHeight="2dp"
+        android:scrollbars="none"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ListView>
 
 
     <TextView
-        android:id="@+id/txtstatus"
-        android:layout_width="230dp"
+        android:id="@+id/txttotal"
+        android:layout_width="@dimen/_200sdp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="@dimen/_330sdp"
+        android:text="ยอดรวม"
+        android:textColor="#000000"
+        android:textSize="@dimen/_20sdp"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txtstatus"
+        android:layout_width="@dimen/_160sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_380sdp"
         android:text="สถานะอาหาร"
         android:textColor="#000000"
-        android:textSize="26dp"
+        android:textSize="@dimen/_16sdp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txttotal"
-        android:layout_width="230dp"
+        android:id="@+id/txtpayment"
+        android:layout_width="@dimen/_160sdp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="520dp"
-        android:text="ราคารวม"
+        android:layout_marginTop="@dimen/_420sdp"
+        android:text="สถานะชำระเงิน"
         android:textColor="#000000"
-        android:textSize="26dp"
+        android:textSize="@dimen/_16sdp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="440dp"
+        android:id="@+id/btnstatus"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_375sdp"
         android:text="เปลี่ยนสถานะ"
-        android:textSize="26dp"
+        android:textSize="@dimen/_20sdp"
         android:background="#5DADE2 "
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -81,11 +101,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="510dp"
+        android:id="@+id/btnpayment"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_415sdp"
         android:text="ชำระเงิน"
-        android:textSize="26dp"
+        android:textSize="@dimen/_20sdp"
         android:background="#7DCEA0"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -93,13 +114,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="580dp"
+        android:id="@+id/btnsave"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_460sdp"
         android:background="#F8C471"
         android:text="บันทึก"
-        android:textSize="26dp"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:textSize="@dimen/_20sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

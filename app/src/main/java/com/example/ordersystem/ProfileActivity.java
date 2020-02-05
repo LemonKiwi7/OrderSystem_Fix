@@ -1,12 +1,19 @@
 package com.example.ordersystem;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -21,14 +28,14 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         connectionClass = new ConnectionClass();
 
-        Button btndata = (Button) findViewById(R.id.btndata);
-        Button btncancel = (Button) findViewById(R.id.btncancel);
-        Button btnsave = (Button) findViewById(R.id.btnsave);
-        final EditText edtid = (EditText) findViewById(R.id.edtid);
-        final EditText edtfname = (EditText) findViewById(R.id.edtfname);
-        final EditText edtlname = (EditText) findViewById(R.id.edtlname);
-        final EditText edtadd = (EditText) findViewById(R.id.edtadd);
-        final EditText edttel = (EditText) findViewById(R.id.edttel);
+        Button btndata = findViewById(R.id.btndata);
+        Button btncancel = findViewById(R.id.btncancel);
+        Button btnsave = findViewById(R.id.btnsave);
+        final EditText edtid = findViewById(R.id.edtid);
+        final EditText edtfname = findViewById(R.id.edtfname);
+        final EditText edtlname = findViewById(R.id.edtlname);
+        final EditText edtadd = findViewById(R.id.edtadd);
+        final EditText edttel = findViewById(R.id.edttel);
 
         btndata.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
                         String id = edtid.getText().toString();
                         Statement stmt = con.createStatement();
                         if(id.equals("")){
-                            Toast.makeText(ProfileActivity.this, "กรุณากรอกไอดี", Toast.LENGTH_SHORT).show();
+                            message = "กรุณากรอกไอดี";
                         }
                         else {
                             String query = "Select em_fname, em_lname, em_address, em_tel From Employees where em_id = '" + id + "'";
@@ -76,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
                 edtlname.setText("");
                 edtadd.setText("");
                 edttel.setText("");
-                openMenu();
+                finish();
             }
         });//btncancel
 
@@ -124,10 +131,4 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     } //onCreate
-
-    public void openMenu() {
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }//main

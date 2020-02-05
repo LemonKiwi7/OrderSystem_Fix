@@ -1,4 +1,5 @@
 package com.example.ordersystem;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -12,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -19,9 +23,9 @@ import java.sql.Statement;
 
 public class AddActivity extends AppCompatActivity {
     ConnectionClass connectionClass;
-    public static final int REQUEST_GALLERY = 1;
+   // public static final int REQUEST_GALLERY = 1;
     String message = "";
-    Bitmap bitmap;
+   // Bitmap bitmap;
     ImageView imgpic;
 
     @Override
@@ -29,26 +33,36 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         connectionClass = new ConnectionClass();
-        imgpic = (ImageView) findViewById(R.id.imgpic);
-        final RadioButton radiofoods = (RadioButton) findViewById(R.id.radio_foods);
-        final RadioButton radionoodles = (RadioButton) findViewById(R.id.radio_noodles);
-        final RadioButton radiodrinks = (RadioButton) findViewById(R.id.radio_drinks);
-        final EditText edtid = (EditText) findViewById(R.id.edtid);
-        final EditText edtname = (EditText) findViewById(R.id.edtname);
-        final EditText edtprice = (EditText) findViewById(R.id.edtprice);
-        Button btnupload = (Button) findViewById(R.id.btnupload);
-        Button btncancel = (Button) findViewById(R.id.btncancel);
-        Button btnsave = (Button) findViewById(R.id.btnsave);
+        imgpic = findViewById(R.id.imgpic);
+        final RadioButton radiofoods = findViewById(R.id.radio_foods);
+        final RadioButton radionoodles = findViewById(R.id.radio_noodles);
+        final RadioButton radiodrinks = findViewById(R.id.radio_drinks);
+        final EditText edturl = findViewById(R.id.edturl);
+        final EditText edtid = findViewById(R.id.edtid);
+        final EditText edtname = findViewById(R.id.edtname);
+        final EditText edtprice = findViewById(R.id.edtprice);
+        Button btnupload = findViewById(R.id.btnupload);
+        Button btncancel = findViewById(R.id.btncancel);
+        Button btnsave = findViewById(R.id.btnsave);
         final ConnectionClass connectionClass;
         connectionClass = new ConnectionClass();
 
         btnupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+           /*     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent
-                        , "Select Picture"), REQUEST_GALLERY);
+                        , "Select Picture"), REQUEST_GALLERY);*/
+                String url = edturl.getText().toString();
+                if (url.equals("")){
+                    Toast.makeText(AddActivity.this, "กรุณากรอก URL รูปภาพ", Toast.LENGTH_SHORT).show();
+                }else {
+                    Picasso.with(AddActivity.this).load(url)
+                            .resize(200, 200)
+                            .centerInside()
+                            .into(imgpic);
+                }
             }
         });
 
@@ -58,7 +72,7 @@ public class AddActivity extends AppCompatActivity {
                 edtid.setText("");
                 edtname.setText("");
                 edtprice.setText("");
-                openMenu();
+                finish();
             }
         });//btncancel
 
@@ -70,49 +84,53 @@ public class AddActivity extends AppCompatActivity {
                     if(con == null) {
                         message = "ไม่พบฐานข้อมูล";
                     } else {
-                        String id = edtid.getText().toString();
-                        String name = edtname.getText().toString();
-                        int price = Integer.parseInt(edtprice.getText().toString());
-                        Bitmap image = ((BitmapDrawable) imgpic.getDrawable()).getBitmap();
-                        Statement stmt1 = con.createStatement();
-                        if(radiofoods.isChecked() == true) {
-                            String strInsert = "Insert Into Foods (f_id, f_name, f_price, f_pic) Values('" + id + "','" +
-                                    name + "','" + price + "','" + image + "')";
-                            stmt1.executeUpdate(strInsert);
-                            message = "ลงฐานข้อมูลเรียบร้อย";
+                        String id = edtid.getText().toString().trim();
+                        String name = edtname.getText().toString().trim();
+                        String price1 = edtprice.getText().toString().trim();
+                        if (id.equals("")){
+                            message = "กรุณากรอกไอดี";
+                        } else if (name.equals("")){
+                            message = "กรุณากรอกชื่ออาหาร";
+                        } else if (price1.equals("")){
+                            message = "กรุณากรอกราคา";
+                        }else{
+                                int price = Integer.parseInt(edtprice.getText().toString().trim());
+                              //  Bitmap image = ((BitmapDrawable) imgpic.getDrawable()).getBitmap();
+                                Statement stmt1 = con.createStatement();
+                                String img;
+                                img = edturl.getText().toString();
+                                if (radiofoods.isChecked() == true) {
+                                    String strInsert = "Insert Into Foods (f_id, f_name, f_price, f_pic) Values('" + id + "','" +
+                                            name + "','" + price + "','" + img + "')";
+                                    stmt1.executeUpdate(strInsert);
+                                    message = "ลงฐานข้อมูลเรียบร้อย";
+                                } else if (radionoodles.isChecked() == true) {
+                                    String strInsert = "Insert Into Noodles (n_id, n_name, n_price, n_pic) Values('" + id + "','" +
+                                            name + "','" + price + "', '" + img + "')";
+                                    stmt1.executeUpdate(strInsert);
+                                    message = "ลงฐานข้อมูลเรียบร้อย";
+                                } else if (radiodrinks.isChecked() == true) {
+                                    String strInsert = "Insert Into Drinks (d_id, d_name, d_price, d_pic) Values('" + id + "','" +
+                                            name + "','" + price + "','" + img + "')";
+                                    stmt1.executeUpdate(strInsert);
+                                    message = "ลงฐานข้อมูลเรียบร้อย";
+                                }
+                            }
+                        edturl.setText("");
+                        edtid.setText("");
+                        edtname.setText("");
+                        edtprice.setText("");
                         }
-                        else if (radionoodles.isChecked() == true) {
-                            String strInsert = "Insert Into Noodles (n_id, n_name, n_price, n_pic) Values('" + id + "','" +
-                                    name + "','" + price +"', '" + image + "')";
-                            stmt1.executeUpdate(strInsert);
-                            message = "ลงฐานข้อมูลเรียบร้อย";
-                        }
-                        else if (radiodrinks.isChecked() == true) {
-                            String strInsert = "Insert Into Drinks (d_id, d_name, d_price, d_pic) Values('" + id + "','" +
-                                    name + "','" + price + "','" + image + "')";
-                            stmt1.executeUpdate(strInsert);
-                            message = "ลงฐานข้อมูลเรียบร้อย";
-                        }
-                    }
                 } catch (Exception ex) {
                     message = "Exceptions \n" + ex;
                 }
                 Toast.makeText(AddActivity.this, message, Toast.LENGTH_SHORT).show();
-                edtid.setText("");
-                edtname.setText("");
-                edtprice.setText("");
             }
         }); //btnsave*/
 
     }//onCreate
 
-    public void openMenu() {
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+  /*  public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
             Uri uri = data.getData();
             try {
@@ -124,6 +142,6 @@ public class AddActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
 }//main

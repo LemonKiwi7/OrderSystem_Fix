@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         connectionClass = new ConnectionClass();
-        edtuserid = (EditText) findViewById(R.id.editUser);
-        edtpass = (EditText) findViewById(R.id.editPw);
-        btnlogin = (Button) findViewById(R.id.btn_login);
-        pbbar = (ProgressBar) findViewById(R.id.progressBar);
+        edtuserid = findViewById(R.id.editUser);
+        edtpass = findViewById(R.id.editPw);
+        btnlogin = findViewById(R.id.btn_login);
+        pbbar = findViewById(R.id.progressBar);
         pbbar.setVisibility(View.GONE);
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
