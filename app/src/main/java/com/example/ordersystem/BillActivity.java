@@ -4,7 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +12,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.squareup.picasso.Picasso;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -55,7 +54,7 @@ public class BillActivity extends AppCompatActivity {
     } //onCreate
     private class SyncData extends AsyncTask<String, String, String>
     {
-        String msg = "Fail";
+        String msg = "ไม่พบรายการสั่งอาหาร";
         ProgressDialog progress;
 
         @Override
@@ -83,16 +82,12 @@ public class BillActivity extends AppCompatActivity {
                                 billsArrayList.add(new ClassListBills(rs.getString("or_table")
                                         , rs.getString("or_date"), rs.getString("or_total")
                                         , rs.getBoolean("or_status"),rs.getBoolean("or_payment")));
+                                msg = "พบรายการสั่งอาหาร";
+                                success = true;
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
                         }
-                        msg = "พบรายการสั่งอาหาร";
-                        success = true;
-
-                    } else {
-                        msg = "ไม่พบรายการสั่งอาหาร";
-                        success = false;
                     }
                 }
             } catch (Exception e) {

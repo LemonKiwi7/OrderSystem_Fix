@@ -1,9 +1,6 @@
 package com.example.ordersystem;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +11,6 @@ import android.widget.Toast;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import android.net.Uri;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import android.provider.MediaStore.Images.Media;
 
 import com.squareup.picasso.Picasso;
 
@@ -52,15 +45,11 @@ public class EditActivity extends AppCompatActivity {
         btnupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(Intent.createChooser(intent
-                        , "Select Picture"), REQUEST_GALLERY);*/
                 String url = edturl.getText().toString();
                 if (url.equals("")){
                     Toast.makeText(EditActivity.this, "กรุณากรอก URL รูปภาพ", Toast.LENGTH_SHORT).show();
                 }else {
-                    Picasso.with(EditActivity.this).load(url)
+                    Picasso.get().load(url)
                             .resize(200, 200)
                             .centerInside()
                             .into(imgpic);
@@ -178,6 +167,7 @@ public class EditActivity extends AppCompatActivity {
                                 message = "แก้ไขข้อมูลเรียบร้อย";
                             }
                         }
+                        imgpic.setImageResource(R.drawable.diet);
                         edturl.setText("");
                         edtid.setText("");
                         edtname.setText("");
@@ -215,11 +205,13 @@ public class EditActivity extends AppCompatActivity {
                                 String strDelete = "Delete From Drinks Where d_id = '" + id + "'";
                                 stmt1.executeUpdate(strDelete);
                                 message = "ลบข้อมูลเรียบร้อย";
-                                edtid.setText("");
-                                edtname.setText("");
-                                edtprice.setText("");
                             }
                         }
+                        imgpic.setImageResource(R.drawable.diet);
+                        edturl.setText("");
+                        edtid.setText("");
+                        edtname.setText("");
+                        edtprice.setText("");
                     }
                 } catch (Exception ex) {
                     message = "Exceptions \n" + ex;
@@ -228,17 +220,4 @@ public class EditActivity extends AppCompatActivity {
             }
         });
     }
-   /* public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
-            Uri uri = data.getData();
-            try {
-                bitmap = Media.getBitmap(this.getContentResolver(), uri);
-                imgpic.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 }

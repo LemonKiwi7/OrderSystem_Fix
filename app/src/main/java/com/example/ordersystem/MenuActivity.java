@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -177,7 +177,7 @@ public class MenuActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO Auto-generated method stub
-                        finish();
+                        openLogin();
                         Toast.makeText(MenuActivity.this,"ออกจากระบบเรียบร้อย" ,
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -422,7 +422,7 @@ public class MenuActivity extends AppCompatActivity {
                 }
                 viewHolder.textName.setText(parkingList.get(position).getName()+"");
                 viewHolder.textPrice.setText(parkingList.get(position).getPrice() +"");
-                Picasso.with(context).load(parkingList.get(position).getImage())
+                Picasso.get().load(parkingList.get(position).getImage())
                         .resize(600,400)
                         .centerInside()
                         .into(viewHolder.imageView);
@@ -450,6 +450,12 @@ public class MenuActivity extends AppCompatActivity {
             } // View getView
         } // MyAppAdapter
 
+    public void openLogin() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    } // เปลี่ยนหน้าไปบิล
+
     public void openList() {
         Intent intent = new Intent(this, ListActivity.class);
         Bundle bundle = getIntent().getExtras();
@@ -465,5 +471,7 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BillActivity.class);
         startActivity(intent);
     } // เปลี่ยนหน้าไปบิล
+
+
 
 } //main

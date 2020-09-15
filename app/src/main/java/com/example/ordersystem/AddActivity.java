@@ -1,11 +1,6 @@
 package com.example.ordersystem;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +11,6 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 
@@ -27,6 +20,7 @@ public class AddActivity extends AppCompatActivity {
     String message = "";
    // Bitmap bitmap;
     ImageView imgpic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +52,7 @@ public class AddActivity extends AppCompatActivity {
                 if (url.equals("")){
                     Toast.makeText(AddActivity.this, "กรุณากรอก URL รูปภาพ", Toast.LENGTH_SHORT).show();
                 }else {
-                    Picasso.with(AddActivity.this).load(url)
+                    Picasso.get().load(url)
                             .resize(200, 200)
                             .centerInside()
                             .into(imgpic);
@@ -116,6 +110,7 @@ public class AddActivity extends AppCompatActivity {
                                     message = "ลงฐานข้อมูลเรียบร้อย";
                                 }
                             }
+                        imgpic.setImageResource(R.drawable.pic);
                         edturl.setText("");
                         edtid.setText("");
                         edtname.setText("");
